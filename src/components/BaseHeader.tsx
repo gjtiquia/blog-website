@@ -6,7 +6,7 @@ export const BaseHeader = (props: BaseHeaderProps) => {
     return (
         <header className={props.headerClassName}>
             <nav className="p-2">
-                <ul className="flex justify-end gap-4">
+                <ul className="flex justify-end gap-4 text-sm sm:text-base">
                     <li>
                         <a href="/">Home</a>
                     </li>

@@ -5,7 +5,7 @@ interface BaseFooterProps {
 export const BaseFooter = (props: BaseFooterProps) => {
     return (
         <footer className={props.footerClassName}>
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col p-2 text-sm sm:text-base">
                 <div className="flex justify-center">
                     <p>GJ's Blog</p>
                 </div>
