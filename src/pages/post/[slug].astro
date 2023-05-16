@@ -20,6 +20,8 @@ const { title, body } = Astro.props;
 ---
 
 <BaseLayout title={title} titlePrefix={""}>
-    <h1>{title}</h1>
-    <PortableText portableText={body} />
+    <article class="prose">
+        <h1>{title}</h1>
+        <PortableText portableText={body} />
+    </article>
 </BaseLayout>

@@ -19,11 +19,8 @@ const customComponents = {
       `;
     },
 
-    // break 
-    // TODO : Refactor!
-    // https://www.sanity.io/schemas/breaks-for-portable-text-189dba35
-    break: ({ value }) => {
-      return `<br>`
+    lineBreak: ({ value }) => {
+      return `<br/>`
     }
   },
 };
