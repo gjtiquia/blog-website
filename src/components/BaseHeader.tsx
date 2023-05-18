@@ -16,7 +16,7 @@ export const BaseHeader = (props: BaseHeaderProps) => {
                     </li>
 
                     <li>
-                        <a href="/blog">Blog</a>
+                        <a href="/post">Posts</a>
                     </li>
 
                     <li>
