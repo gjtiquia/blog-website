@@ -1,0 +1,58 @@
+---
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
+import { PortableText } from "astro-portabletext";
+import { formatDate, getAuthor, getPost, getPosts, urlFor } from "@src/sanity";
+import BaseLayout from "@src/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+    const posts = await getPosts();
+
+    return posts.map((post) => ({
+        params: {
+            slug: post.slug.current,
+        },
+        props: {
+            authorRef: post.author ? post.author._ref : "",
+        },
+    }));
+}
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const { slug } = Astro.params as Params;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { authorRef } = Astro.props as Props;
+
+const post = await getPost(slug);
+const author = await getAuthor(authorRef);
+
+// TODO : Handle custom component for image from post.body in PortableText!
+---
+
+<BaseLayout title={post.title ? post.title : "Untitled"} titlePrefix={""}>
+    <div>
+        {
+            post.mainImage ? (
+                <img src={urlFor(post.mainImage).url()} alt="Cover image" />
+            ) : (
+                <div />
+            )
+        }
+    </div>
+    <div>
+        <h1>{post.title}</h1>
+        <p>{"Author: " + author.name}</p>
+        <p>
+            {"Created At: " + formatDate(post._createdAt)}
+        </p>
+        <p>
+            {
+                "Published At: " +
+                    formatDate(post.publishedAt ? post.publishedAt : "")
+            }
+        </p>
+        <div class="post__content">
+            <PortableText value={post.body} />
+        </div>
+    </div>
+</BaseLayout>
