@@ -1,0 +1,11 @@
+---
+import type { Image } from "@sanity/types";
+import { urlFor } from "@src/sanity";
+
+const props = Astro.props;
+
+const image = props.node as Image;
+const isNodeImage: boolean = image != null;
+---
+
+{isNodeImage ? <img src={urlFor(image).url()} alt="Image" /> : <div />}

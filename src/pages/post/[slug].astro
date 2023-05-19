@@ -3,6 +3,7 @@ import type { InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
 import { PortableText } from "astro-portabletext";
 import { formatDate, getAuthor, getPost, getPosts, urlFor } from "@src/sanity";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
+import SanityImage from "@src/components/SanityImage.astro";
 
 export async function getStaticPaths() {
     const posts = await getPosts();
@@ -25,8 +26,6 @@ const { authorRef } = Astro.props as Props;
 
 const post = await getPost(slug);
 const author = await getAuthor(authorRef);
-
-// TODO : Handle custom component for image from post.body in PortableText!
 ---
 
 <BaseLayout title={post.title ? post.title : "Untitled"} titlePrefix={""}>
@@ -51,8 +50,15 @@ const author = await getAuthor(authorRef);
                     formatDate(post.publishedAt ? post.publishedAt : "")
             }
         </p>
-        <div class="post__content">
-            <PortableText value={post.body} />
+        <div>
+            <PortableText
+                value={post.body}
+                components={{
+                    type: {
+                        image: SanityImage,
+                    },
+                }}
+            />
         </div>
     </div>
 </BaseLayout>
