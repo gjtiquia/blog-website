@@ -10,7 +10,7 @@ export const BaseFooter = (props: BaseFooterProps) => {
             <hr />
             <div className="flex flex-col p-2">
                 <nav className="px-2 py-1">
-                    <ul className="flex justify-center gap-0.5">
+                    <ul className="flex flex-wrap justify-center gap-0.5">
                         <ListElement>
                             <a href="/">Home</a>
                         </ListElement>

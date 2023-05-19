@@ -4,7 +4,7 @@
 
 import BaseLayout from "@src/layouts/BaseLayout.astro";
 import { CenterProseContainer } from "@src/components/CenterProseContainer";
-import { getPosts } from "@src/sanity";
+import { formatDate, getPosts } from "@src/sanity";
 
 const posts = await getPosts();
 // posts.forEach((post) => console.log(post));
@@ -12,14 +12,28 @@ const posts = await getPosts();
 
 <BaseLayout title={"Posts"}>
     <CenterProseContainer>
-        <h1 class="font-bold text-2xl">{"Posts"}</h1>
+        <h1 class="font-bold text-4xl mb-4">{"Posts"}</h1>
         <section>
-            <ul>
+            <ul class="flex flex-col gap-4">
                 {
                     posts.map((post) => (
                         <li>
                             <a href={`/post/${post.slug.current}`}>
-                                {post.title}
+                                <div class="bg-slate-100 hover:bg-slate-200 active:bg-slate-300 p-4 rounded-md">
+                                    <div class="flex flex-col gap-2">
+                                        <p class="font-bold text-lg mb-1">
+                                            {post.title}
+                                        </p>
+                                        <p class="text-slate-600 text-sm">
+                                            {formatDate(post.publishedAt)}
+                                        </p>
+                                        <div class="flex">
+                                            <p class="bg-slate-400 text-slate-50 px-3 py-1 text-xs rounded-full">
+                                                Tag 1
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </a>
                         </li>
                     ))

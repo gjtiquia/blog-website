@@ -20,7 +20,7 @@ export const BaseHeader = (props: BaseHeaderProps) => {
     return (
         <header className={props.headerClassName + "prose prose-hr:mb-4 prose-a:text-sm prose-p:text-sm text-gray-700"}>
             <nav className="px-2 py-1">
-                <ul className="flex justify-end gap-0.5">
+                <ul className="flex flex-wrap justify-end gap-0.5">
                     <ListElement>
                         <a href="/">Home</a>
                     </ListElement>
