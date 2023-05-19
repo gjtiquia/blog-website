@@ -1,0 +1,19 @@
+---
+import { CenterProseContainer } from "@src/components/CenterProseContainer";
+import BaseLayout from "@src/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title={"Error 404"} titlePrefix={""}>
+    <CenterProseContainer className="h-full">
+        <div class="h-full flex flex-col gap-6 justify-center items-center">
+            <h1 class="font-bold text-xl sm:text-2xl text-justify">
+                {"Sorry! I can't find the page that you are looking for :("}
+            </h1>
+            <a
+                href="/"
+                class="sm:text-xl bg-slate-200 hover:bg-slate-300 active:bg-slate-400 px-12 py-2 sm:py-3 rounded-md"
+                >Return Home</a
+            >
+        </div>
+    </CenterProseContainer>
+</BaseLayout>

@@ -4,6 +4,7 @@ import { PortableText } from "astro-portabletext";
 import { formatDate, getAuthor, getPost, getPosts, urlFor } from "@src/sanity";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
 import { ImageComponent } from "@src/components";
+import { CenterProseContainer } from "@src/components/CenterProseContainer";
 
 export async function getStaticPaths() {
     const posts = await getPosts();
@@ -29,28 +30,18 @@ const author = await getAuthor(authorRef);
 ---
 
 <BaseLayout title={post.title ? post.title : "Untitled"} titlePrefix={""}>
-    <div>
-        {
-            post.mainImage ? (
-                <img src={urlFor(post.mainImage).url()} alt="Cover image" />
-            ) : (
-                <div />
-            )
-        }
-    </div>
-    <div>
-        <h1>{post.title}</h1>
-        <p>{"Author: " + author.name}</p>
-        <p>
-            {"Created At: " + formatDate(post._createdAt)}
-        </p>
-        <p>
-            {
-                "Published At: " +
-                    formatDate(post.publishedAt ? post.publishedAt : "")
-            }
-        </p>
-        <div>
+    <CenterProseContainer>
+        <article
+            class="prose prose-h1:mb-2 prose-hr:mt-4 prose-hr:mb-8 prose-img:rounded-xl prose-img:mx-auto prose-code:before:content-none prose-code:after:content-none"
+        >
+            <h1>{post.title}</h1>
+            <div class="not-prose flex flex-row justify-between text-gray-500">
+                <p>{"By " + author.name}</p>
+                <p>
+                    {formatDate(post.publishedAt ? post.publishedAt : "")}
+                </p>
+            </div>
+            <hr />
             <PortableText
                 value={post.body}
                 components={{
@@ -59,6 +50,6 @@ const author = await getAuthor(authorRef);
                     },
                 }}
             />
-        </div>
-    </div>
+        </article>
+    </CenterProseContainer>
 </BaseLayout>

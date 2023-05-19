@@ -1,3 +1,5 @@
+// Reference: https://www.sanity.io/docs/image-url
+
 import type { Image } from "@sanity/types";
 import type { Props, TypedObject } from "astro-portabletext/types"
 import { urlFor } from "@src/sanity";
@@ -8,7 +10,7 @@ export const ImageComponent = (props: Props<TypedObject>) => {
 
     return (isNodeImage ?
         (
-            <img src={urlFor(image).url()} alt="Image" />
+            <img src={urlFor(image).auto("format").url()} alt={"Image"} />
         ) : (
             <div></div>
         )
