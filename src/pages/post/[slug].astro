@@ -3,7 +3,7 @@ import type { InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
 import { PortableText } from "astro-portabletext";
 import { formatDate, getAuthor, getPost, getPosts, urlFor } from "@src/sanity";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
-import SanityImage from "@src/components/SanityImage.astro";
+import { ImageComponent } from "@src/components";
 
 export async function getStaticPaths() {
     const posts = await getPosts();
@@ -55,7 +55,7 @@ const author = await getAuthor(authorRef);
                 value={post.body}
                 components={{
                     type: {
-                        image: SanityImage,
+                        image: ImageComponent,
                     },
                 }}
             />
