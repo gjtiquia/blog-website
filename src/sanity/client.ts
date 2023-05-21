@@ -38,6 +38,18 @@ export async function getAuthors(): Promise<Author[]> {
     );
 }
 
+export async function getTag(tagRef: string): Promise<Tag> {
+    return await client.fetch(
+        groq`*[_type == "tag" && _id==$tagRef][0]`, { tagRef }
+    );
+}
+
+export async function getTags(): Promise<Tag[]> {
+    return await client.fetch(
+        groq`*[_type == "tag"]`
+    );
+}
+
 export interface Post {
     // Document
     _type: "post";
@@ -46,9 +58,8 @@ export interface Post {
     // Metadata
     title?: string;
     slug: Slug;
-    author?: SanityReference; // Commented because this is reference type
-    mainImage?: ImageAsset;
-    // categories: Category[]; // Commented because this is reference type // TODO : Change to tags
+    author?: SanityReference;
+    tags?: SanityReference[]; // TODO : Test if can get
     publishedAt?: string;
 
     // Content
@@ -67,14 +78,14 @@ export interface Author {
     bio: PortableTextBlock[];
 }
 
-// TODO : Change to tags
-export interface Category {
+export interface Tag {
     // Document
-    _type: "category";
+    _type: "tag";
     _createdAt: string;
 
     // Metadata
-    title?: string;
-    description?: string;
+    name?: string;
+    slug: Slug;
+    description?: string
 }
 
