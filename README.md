@@ -1,6 +1,6 @@
 # GJ's Blog - Frontend Website
 
-Frontend website for [GJ's Blog](https://blog-gjtiquia.netlify.app/) built with [Astro](https://docs.astro.build), [React Components](https://docs.astro.build/en/core-concepts/framework-components/) and [Sanity](https://www.sanity.io/). Styledn using [TailwindCSS](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
+Frontend website for [GJ's Blog](https://blog-gjtiquia.netlify.app/) built with [Astro](https://docs.astro.build), [React Components](https://docs.astro.build/en/core-concepts/framework-components/) and [Sanity](https://www.sanity.io/). Styled using [TailwindCSS](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
 
 ## Commands
 
