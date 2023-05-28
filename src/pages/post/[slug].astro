@@ -6,6 +6,7 @@ import {
     getAuthor,
     getPost,
     getPosts,
+    getPostTags,
     getTag,
     Tag,
     urlFor,
@@ -21,35 +22,15 @@ export async function getStaticPaths() {
         params: {
             slug: post.slug.current,
         },
-        props: {
-            authorRef: post.author ? post.author._ref : "",
-        },
     }));
 }
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 const { slug } = Astro.params as Params;
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { authorRef } = Astro.props as Props;
-
 const post = await getPost(slug);
-const author = await getAuthor(authorRef);
-
-// console.log(post.tags);
-
-const tags: Tag[] = [];
-if (post.tags) {
-    post.tags.forEach(async (tag) => {
-        const tagRef = tag._ref;
-        const tagContents = await getTag(tagRef);
-
-        // TODO : Should sequentially async get the tag data one by one and add to the list
-        // TODO : Should be also a top level await so all the data is fetched for building the html
-        // console.log(tagContents);
-        // tags.push(tagContents);
-    });
-}
+const author = await getAuthor(post);
+const tags = await getPostTags(post);
 ---
 
 <BaseLayout title={post.title ? post.title : "Untitled"} titlePrefix={""}>
@@ -66,13 +47,17 @@ if (post.tags) {
                     {formatDate(post.publishedAt)}
                 </p>
             </div>
-            <div class="not-prose">
-                <a
-                    href="/tags"
-                    class="bg-slate-400 hover:bg-slate-500 active:bg-slate-600 text-slate-50 px-3 py-1 text-sm rounded-full"
-                >
-                    {"Tag 1"}
-                </a>
+            <div class="not-prose flex gap-2">
+                {
+                    tags.map((tag) => (
+                        <a
+                            href={`/tag/${tag.slug.current}`}
+                            class="bg-slate-400 hover:bg-slate-500 active:bg-slate-600 text-slate-50 px-3 py-1 text-sm rounded-full"
+                        >
+                            {tag.name}
+                        </a>
+                    ))
+                }
             </div>
             <!-- <hr /> -->
             <PortableText

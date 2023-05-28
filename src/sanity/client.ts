@@ -26,7 +26,10 @@ export async function getPost(slug: string): Promise<Post> {
     );
 }
 
-export async function getAuthor(authorRef: string): Promise<Author> {
+export async function getAuthor(post: Post): Promise<Author> {
+
+    const authorRef = post.author ? post.author._ref : "";
+
     return await client.fetch(
         groq`*[_type == "author" && _id==$authorRef][0]`, { authorRef }
     );
@@ -48,6 +51,19 @@ export async function getTags(): Promise<Tag[]> {
     return await client.fetch(
         groq`*[_type == "tag"]`
     );
+}
+
+export async function getPostTags(post: Post): Promise<Tag[]> {
+    // Returns dummy resolved promise with empty array if the post has no tags
+    if (!post.tags) return Promise.resolve([]);
+
+    const getTagsAsync = post.tags.map(async (tag) => {
+        const tagRef = tag._ref;
+        return await getTag(tagRef);
+    });
+
+    // Wait until all concurrent async tasks have completed
+    return await Promise.all(getTagsAsync);
 }
 
 export interface Post {
