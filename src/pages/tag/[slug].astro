@@ -47,13 +47,22 @@ for (const post of posts) {
             <p>{description}</p>
         </section>
         <section>
-            <ul class="flex flex-col gap-4">
-                {
-                    filteredPosts.map((post, index) => (
-                        <PostCard post={post} tags={filteredPostsTags[index]} />
-                    ))
-                }
-            </ul>
+            {
+                filteredPosts.length > 0 ? (
+                    <ul class="flex flex-col gap-4">
+                        {filteredPosts.map((post, index) => (
+                            <PostCard
+                                post={post}
+                                tags={filteredPostsTags[index]}
+                            />
+                        ))}
+                    </ul>
+                ) : (
+                    <div class="bg-slate-100 py-8 flex justify-center items-center rounded-lg">
+                        <p class="text-slate-500">Nothing here yet!</p>
+                    </div>
+                )
+            }
         </section>
     </CenterProseContainer>
 </BaseLayout>
