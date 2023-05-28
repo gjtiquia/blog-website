@@ -17,11 +17,35 @@ const { title, titlePrefix = DEFAULT_TITLE_PREFIX } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{titlePrefix}{title}</title>
     </head>
-    <body class="h-full flex flex-col">
-        <BaseHeader headerClassName="flex-grow-0" />
+    <body class="h-full flex flex-col dark:bg-gray-800">
+        <BaseHeader client:load headerClassName="flex-grow-0" />
         <main class="flex-grow w-11/12 self-center">
             <slot />
         </main>
         <BaseFooter footerClassName={"flex-grow-0"} />
     </body>
 </html>
+
+<script is:inline>
+    // Reference: https://www.kevinzunigacuellar.com/blog/dark-mode-in-astro/
+
+    const theme = (() => {
+        if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+        ) {
+            return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+        }
+        return "light";
+    })();
+
+    if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+    } else {
+        document.documentElement.classList.add("dark");
+    }
+    window.localStorage.setItem("theme", theme);
+</script>

@@ -6,7 +6,7 @@ interface BaseFooterProps {
 
 export const BaseFooter = (props: BaseFooterProps) => {
     return (
-        <footer className={props.footerClassName + "prose prose-hr:mt-16 prose-hr:mb-0 prose-a:text-sm prose-p:text-sm text-gray-700"}>
+        <footer className={props.footerClassName + "prose prose-hr:mt-16 dark:prose-hr:border-gray-700 prose-hr:mb-0 prose-a:text-sm prose-p:text-sm text-gray-700 dark:text-gray-300"}>
             <hr />
             <div className="flex flex-col p-2">
                 <nav className="px-2 py-1">
@@ -55,7 +55,7 @@ export const BaseFooter = (props: BaseFooterProps) => {
                         <a
                             target="_blank"
                             href="https://gjtiquia.com"
-                            className="font-bold hover:text-blue-800 hover:underline"
+                            className="font-bold hover:text-blue-800 dark:hover:text-blue-400 hover:underline"
                         >
                             GJTiquia
                         </a>

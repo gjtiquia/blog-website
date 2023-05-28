@@ -2,7 +2,7 @@
 import type { InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
 import { Post, Tag, getPostTags, getPosts, getTags } from "@src/sanity";
-import { CenterProseContainer, PostCard } from "@src/components";
+import { CenterProseContainer, PostCard, HeaderTitle } from "@src/components";
 
 export async function getStaticPaths() {
     const tags = await getTags();
@@ -42,8 +42,8 @@ for (const post of posts) {
 
 <BaseLayout title={pageTitle} titlePrefix="Tag - ">
     <CenterProseContainer>
-        <h1 class="font-bold text-4xl mb-4">{`${pageTitle}`}</h1>
-        <section class="mb-4">
+        <HeaderTitle title={pageTitle} className="mb-4" />
+        <section class="prose dark:prose-invert mb-4">
             <p>{description}</p>
         </section>
         <section>
@@ -58,8 +58,10 @@ for (const post of posts) {
                         ))}
                     </ul>
                 ) : (
-                    <div class="bg-slate-100 py-8 flex justify-center items-center rounded-lg">
-                        <p class="text-slate-500">Nothing here yet!</p>
+                    <div class="bg-slate-100 dark:bg-gray-700 py-8 flex justify-center items-center rounded-lg">
+                        <p class="text-slate-500 dark:text-gray-400">
+                            Nothing here yet!
+                        </p>
                     </div>
                 )
             }

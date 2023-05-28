@@ -3,7 +3,7 @@
 // Reference: https://github.com/sanity-io/sanity-template-astro-clean/blob/main/app/src/components/Card.astro
 
 import BaseLayout from "@src/layouts/BaseLayout.astro";
-import { CenterProseContainer, PostCard } from "@src/components";
+import { CenterProseContainer, PostCard, HeaderTitle } from "@src/components";
 import { getPosts, getPostTags } from "@src/sanity";
 
 const posts = await getPosts();
@@ -16,7 +16,7 @@ const allTags = await Promise.all(getAllTagsAsync);
 
 <BaseLayout title={"Posts"}>
     <CenterProseContainer>
-        <h1 class="font-bold text-4xl mb-4">{"Posts"}</h1>
+        <HeaderTitle title="Posts" className="mb-4" />
         <section>
             <ul class="flex flex-col gap-4">
                 {

@@ -1,12 +1,10 @@
 ---
-import { CenterProseContainer } from "@src/components";
+import { CenterProseContainer, HeaderTitle } from "@src/components";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title={"Home"}>
 	<CenterProseContainer>
-		<div>
-			<h1 class="font-bold text-4xl">{"Home"}</h1>
-		</div>
+		<HeaderTitle title="Home" />
 	</CenterProseContainer>
 </BaseLayout>

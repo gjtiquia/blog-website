@@ -32,11 +32,11 @@ const tags = await getPostTags(post);
 <BaseLayout title={post.title ? post.title : "Untitled"} titlePrefix={""}>
     <CenterProseContainer>
         <article
-            class="prose prose-h1:mb-2 prose-hr:mt-2 prose-hr:mb-8 prose-img:rounded-xl prose-img:mx-auto prose-code:before:content-none prose-code:after:content-none"
+            class="prose dark:prose-invert prose-h1:mb-2 prose-hr:mt-2 prose-hr:mb-8 prose-img:rounded-xl prose-img:mx-auto prose-code:before:content-none prose-code:after:content-none"
         >
             <h1>{post.title}</h1>
             <div
-                class="not-prose mb-2 flex flex-row justify-between text-gray-500"
+                class="not-prose mb-2 flex flex-row justify-between text-gray-500 dark:text-gray-400"
             >
                 <p>{"By " + author.name}</p>
                 <p>
@@ -48,7 +48,7 @@ const tags = await getPostTags(post);
                     tags.map((tag) => (
                         <a
                             href={`/tag/${tag.slug.current}`}
-                            class="bg-slate-400 hover:bg-slate-500 active:bg-slate-600 text-slate-50 px-3 py-1 text-sm rounded-full"
+                            class="bg-slate-400 hover:bg-slate-500 active:bg-slate-600 text-slate-50 dark:bg-gray-500 dark:text-gray-200 dark:hover:bg-gray-400 dark:active:bg-gray-300 px-3 py-1 text-sm rounded-full"
                         >
                             {tag.name}
                         </a>
