@@ -4,4 +4,3 @@ export * from "./ImageComponent";
 export * from "./CenterProseContainer";
 export * from "./PostCard";
 export * from "./HeaderTitle";
-export * from "./CodeComponent";

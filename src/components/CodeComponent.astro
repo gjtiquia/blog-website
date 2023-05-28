@@ -1,0 +1,19 @@
+---
+import type {
+    Props as CustomComponentProps,
+    TypedObject,
+} from "astro-portabletext/types";
+
+interface CodeNode extends TypedObject {
+    code?: string;
+    language?: string;
+}
+
+interface Props extends CustomComponentProps<TypedObject> {}
+const { node } = Astro.props;
+const codeNode: CodeNode = node;
+
+// console.log(codeNode.code);
+---
+
+<code>{codeNode.code}</code>

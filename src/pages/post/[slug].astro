@@ -9,11 +9,8 @@ import {
     getPostTags,
 } from "@src/sanity";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
-import {
-    ImageComponent,
-    CenterProseContainer,
-    CodeComponent,
-} from "@src/components";
+import { ImageComponent, CenterProseContainer } from "@src/components";
+import CodeComponent from "@src/components/CodeComponent.astro";
 
 export async function getStaticPaths() {
     const posts = await getPosts();
