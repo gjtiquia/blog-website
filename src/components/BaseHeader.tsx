@@ -22,11 +22,16 @@ export const ListElement = (props: ListProps) => {
 }
 
 export const BaseHeader = (props: BaseHeaderProps) => {
+    const [isMounted, setIsMounted] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
 
     const handleClick = () => {
         setTheme(theme === "light" ? "dark" : "light");
     };
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
         if (theme === "dark") {
@@ -59,7 +64,10 @@ export const BaseHeader = (props: BaseHeaderProps) => {
 
                     <ListElement>
                         <button className="text-sm" onClick={handleClick}>
-                            <FontAwesomeIcon icon={theme === "light" ? faSun : faMoon} />
+                            {isMounted
+                                ? < FontAwesomeIcon icon={theme === "light" ? faSun : faMoon} />
+                                : <div>{"···"}</div>
+                            }
                         </button>
                     </ListElement>
                 </ul>
