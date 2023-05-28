@@ -7,7 +7,7 @@ interface PostCardProps {
 
 export const PostCard = ({ post, tags }: PostCardProps) => {
     return (
-        <li>
+        <li key={post.slug.current}>
             <a href={`/post/${post.slug.current}`}>
                 <div className="bg-slate-100 hover:bg-slate-200 active:bg-slate-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:active:bg-gray-500 p-4 rounded-md">
                     <div className="flex flex-col gap-2">
