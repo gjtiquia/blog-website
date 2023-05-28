@@ -9,7 +9,11 @@ import {
     getPostTags,
 } from "@src/sanity";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
-import { ImageComponent, CenterProseContainer } from "@src/components";
+import {
+    ImageComponent,
+    CenterProseContainer,
+    CodeComponent,
+} from "@src/components";
 
 export async function getStaticPaths() {
     const posts = await getPosts();
@@ -27,6 +31,8 @@ const { slug } = Astro.params as Params;
 const post = await getPost(slug);
 const author = await getAuthor(post);
 const tags = await getPostTags(post);
+
+// console.log(post);
 ---
 
 <BaseLayout title={post.title ? post.title : "Untitled"} titlePrefix={""}>
@@ -61,6 +67,7 @@ const tags = await getPostTags(post);
                 components={{
                     type: {
                         image: ImageComponent,
+                        code: CodeComponent,
                     },
                 }}
             />
