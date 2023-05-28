@@ -16,6 +16,21 @@ const { title, titlePrefix = DEFAULT_TITLE_PREFIX } = Astro.props;
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>{titlePrefix}{title}</title>
+
+        <script
+            type="text/partytown"
+            src="https://www.googletagmanager.com/gtag/js?id=G-WCRSGH6TJP"
+        ></script>
+        <script type="text/partytown">
+            // Reference: https://www.kevinzunigacuellar.com/blog/google-analytics-in-astro/
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-WCRSGH6TJP");
+        </script>
     </head>
     <body class="h-full flex flex-col dark:bg-gray-800">
         <BaseHeader client:load headerClassName="flex-grow-0" />
