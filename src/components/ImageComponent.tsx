@@ -10,9 +10,17 @@ export const ImageComponent = (props: Props<TypedObject>) => {
 
     return (isNodeImage ?
         (
-            <img src={urlFor(image).auto("format").url()} alt={"Image"} />
+            <RawImageComponent image={image} />
         ) : (
             <div></div>
         )
+    )
+}
+
+export const RawImageComponent = ({ image }: { image?: Image }) => {
+    if (!image) return (<div />)
+
+    return (
+        <img src={urlFor(image).auto("format").url()} alt={"Image"} />
     )
 }

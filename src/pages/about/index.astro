@@ -1,10 +1,25 @@
 ---
-import { CenterProseContainer, HeaderTitle } from "@src/components";
+import {
+    CenterProseContainer,
+    HeaderTitle,
+    ImageComponent,
+    RawImageComponent,
+} from "@src/components";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
+import { getAuthors } from "@src/sanity";
+import { PortableText } from "astro-portabletext";
+
+const authors = await getAuthors();
+const topAuthor = authors[0]; // Hard-code to get the first author
 ---
 
 <BaseLayout title={"About"}>
     <CenterProseContainer>
-        <HeaderTitle title="About 🙋‍♂️" />
+        <HeaderTitle title="About 🙋‍♂️" className="mb-8" />
+        <section class="prose dark:prose-invert">
+            <h2>{topAuthor.name}</h2>
+            <RawImageComponent image={topAuthor.image} />
+            <PortableText value={topAuthor.bio} />
+        </section>
     </CenterProseContainer>
 </BaseLayout>
