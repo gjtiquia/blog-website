@@ -1,4 +1,11 @@
 ---
+// References:
+// https://docs.astro.build/en/reference/api-reference/#prism-
+// https://docs.astro.build/en/guides/markdown-content/#prism-configuration
+// https://docs.astro.build/en/guides/styling/#load-a-static-stylesheet-via-link-tags
+// https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vsc-dark-plus.css
+
+import { Prism } from "@astrojs/prism";
 import type {
     Props as CustomComponentProps,
     TypedObject,
@@ -11,9 +18,8 @@ interface CodeNode extends TypedObject {
 
 interface Props extends CustomComponentProps<TypedObject> {}
 const { node } = Astro.props;
-const codeNode: CodeNode = node;
 
-// console.log(codeNode.code);
+const codeNode: CodeNode = node;
 ---
 
-<code>{codeNode.code}</code>
+<Prism lang={codeNode.language} code={codeNode.code ? codeNode.code : ""} />

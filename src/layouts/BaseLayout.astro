@@ -17,6 +17,8 @@ const { title, titlePrefix = DEFAULT_TITLE_PREFIX } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{titlePrefix}{title}</title>
 
+        <link href="/prism-vsc-dark-plus.css" rel="stylesheet" />
+
         <script
             type="text/partytown"
             src="https://www.googletagmanager.com/gtag/js?id=G-WCRSGH6TJP"
