@@ -20,7 +20,7 @@ export const PostCard = ({ post, tags }: PostCardProps) => {
                             {formatDate(post.publishedAt)}
                         </p>
 
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap gap-2">
                             {tags.map((tag) => (
                                 <p className="bg-slate-400 text-slate-50 dark:bg-gray-500 dark:text-gray-300 px-3 py-1 text-xs rounded-full">
                                     {tag.name}

@@ -1,10 +1,44 @@
 ---
-import { CenterProseContainer, HeaderTitle } from "@src/components";
+import {
+	CenterProseContainer,
+	HeaderTitle,
+	PostCard,
+	TagListElement,
+} from "@src/components";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
+import { getPostTags, getPosts, getTags } from "@src/sanity";
+
+const tags = await getTags();
+const posts = await getPosts();
+const latestPost = posts[0];
+const latestPostTags = await getPostTags(latestPost);
 ---
 
 <BaseLayout title={"Home"}>
-	<CenterProseContainer>
-		<HeaderTitle title="Home" />
+	<CenterProseContainer className="h-full">
+		<div class="h-full flex flex-col justify-center">
+			<HeaderTitle title="GJ's Blog 📝" className="mb-4" />
+			<section class="prose dark:prose-invert mb-8">
+				<p>Welcome to my blog! Feel free to look around👋</p>
+			</section>
+
+			<section class="flex flex-col gap-4 mb-8">
+				<div class="prose dark:prose-invert">
+					<h2>Latest Post 🔥</h2>
+				</div>
+				<ul>
+					<PostCard post={latestPost} tags={latestPostTags} />
+				</ul>
+			</section>
+
+			<section>
+				<div class="prose dark:prose-invert mb-4">
+					<h2>Tags 🏷️</h2>
+				</div>
+				<ul class="flex gap-4 flex-wrap">
+					{tags.map((tag) => <TagListElement tag={tag} />)}
+				</ul>
+			</section>
+		</div>
 	</CenterProseContainer>
 </BaseLayout>
