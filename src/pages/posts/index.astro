@@ -3,12 +3,11 @@
 // Reference: https://github.com/sanity-io/sanity-template-astro-clean/blob/main/app/src/components/Card.astro
 
 import BaseLayout from "@src/layouts/BaseLayout.astro";
-import { CenterProseContainer } from "@src/components/CenterProseContainer";
-import { formatDate, getPosts, getPostTags } from "@src/sanity";
+import { CenterProseContainer, PostCard } from "@src/components";
+import { getPosts, getPostTags } from "@src/sanity";
 
 const posts = await getPosts();
 
-// TODO : Refactor
 const getAllTagsAsync = posts.map(async (post) => {
     return await getPostTags(post);
 });
@@ -22,27 +21,7 @@ const allTags = await Promise.all(getAllTagsAsync);
             <ul class="flex flex-col gap-4">
                 {
                     posts.map((post, index) => (
-                        <li>
-                            <a href={`/post/${post.slug.current}`}>
-                                <div class="bg-slate-100 hover:bg-slate-200 active:bg-slate-300 p-4 rounded-md">
-                                    <div class="flex flex-col gap-2">
-                                        <p class="font-bold text-lg mb-1">
-                                            {post.title}
-                                        </p>
-                                        <p class="text-slate-600 text-sm">
-                                            {formatDate(post.publishedAt)}
-                                        </p>
-                                        <div class="flex gap-2">
-                                            {allTags[index].map((tag) => (
-                                                <p class="bg-slate-400 text-slate-50 px-3 py-1 text-xs rounded-full">
-                                                    {tag.name}
-                                                </p>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                        <PostCard post={post} tags={allTags[index]} />
                     ))
                 }
             </ul>

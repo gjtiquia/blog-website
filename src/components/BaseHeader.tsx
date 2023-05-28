@@ -36,15 +36,6 @@ export const BaseHeader = (props: BaseHeaderProps) => {
                     <ListElement>
                         <a href="/tags">Tags</a>
                     </ListElement>
-
-                    <ListElement>
-                        <a
-                            href="https://github.com/gjtiquia/blog-website"
-                            target="_blank"
-                        >
-                            GitHub
-                        </a>
-                    </ListElement>
                 </ul>
             </nav>
             <hr />

@@ -1,5 +1,5 @@
 ---
-import type { InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
+import type { InferGetStaticParamsType } from "astro";
 import { PortableText } from "astro-portabletext";
 import {
     formatDate,
@@ -7,13 +7,9 @@ import {
     getPost,
     getPosts,
     getPostTags,
-    getTag,
-    Tag,
-    urlFor,
 } from "@src/sanity";
 import BaseLayout from "@src/layouts/BaseLayout.astro";
-import { ImageComponent } from "@src/components";
-import { CenterProseContainer } from "@src/components/CenterProseContainer";
+import { ImageComponent, CenterProseContainer } from "@src/components";
 
 export async function getStaticPaths() {
     const posts = await getPosts();

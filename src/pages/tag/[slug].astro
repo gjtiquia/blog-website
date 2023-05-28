@@ -1,7 +1,59 @@
 ---
-// TODO
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
+import BaseLayout from "@src/layouts/BaseLayout.astro";
+import { Post, Tag, getPostTags, getPosts, getTags } from "@src/sanity";
+import { CenterProseContainer, PostCard } from "@src/components";
 
-export function getStaticPaths() {
-    return [{ params: { slug: "hello-world" } }];
+export async function getStaticPaths() {
+    const tags = await getTags();
+
+    return tags.map((tag) => ({
+        params: {
+            slug: tag.slug.current,
+        },
+        props: {
+            name: tag.name,
+            description: tag.description,
+        },
+    }));
+}
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+const { slug } = Astro.params as Params;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { name, description } = Astro.props as Props;
+
+const pageTitle = name ? name : "";
+
+const posts = await getPosts();
+const filteredPosts: Post[] = [];
+const filteredPostsTags: Tag[][] = [];
+for (const post of posts) {
+    const tags = await getPostTags(post);
+    const tagNames = tags.map((tag) => tag.name);
+
+    if (tagNames.includes(name)) {
+        filteredPosts.push(post);
+        filteredPostsTags.push(tags);
+    }
 }
 ---
+
+<BaseLayout title={pageTitle} titlePrefix="Tag - ">
+    <CenterProseContainer>
+        <h1 class="font-bold text-4xl mb-4">{`${pageTitle}`}</h1>
+        <section class="mb-4">
+            <p>{description}</p>
+        </section>
+        <section>
+            <ul class="flex flex-col gap-4">
+                {
+                    filteredPosts.map((post, index) => (
+                        <PostCard post={post} tags={filteredPostsTags[index]} />
+                    ))
+                }
+            </ul>
+        </section>
+    </CenterProseContainer>
+</BaseLayout>
