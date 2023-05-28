@@ -1,5 +1,10 @@
 import { ReactNode, useEffect, useState } from "react"
 
+// Reference: https://fontawesome.com/v6/docs/web/use-with/react/add-icons#add-individual-icons-explicitly
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
+// import { faSun, faMoon } from "@fortawesome/free-regular-svg-icons"
+
 interface BaseHeaderProps {
     headerClassName: string
 }
@@ -53,7 +58,9 @@ export const BaseHeader = (props: BaseHeaderProps) => {
                     </ListElement>
 
                     <ListElement>
-                        <button className="text-sm" onClick={handleClick}>Toggle Dark Mode</button>
+                        <button className="text-sm" onClick={handleClick}>
+                            <FontAwesomeIcon icon={theme === "light" ? faSun : faMoon} />
+                        </button>
                     </ListElement>
                 </ul>
             </nav>
