@@ -2,6 +2,8 @@
 
 Frontend website for [GJ's Blog](https://blog.gjtiquia.com/) built with [Astro](https://docs.astro.build), [React Components](https://docs.astro.build/en/core-concepts/framework-components/) and [Sanity](https://www.sanity.io/). Styled using [TailwindCSS](https://docs.astro.build/en/guides/integrations-guide/tailwind/).
 
+The source code for the content studio build with Sanity can be found [here](https://github.com/gjtiquia/blog-studio).
+
 ## Commands
 
 All commands are run from the root of the project, from a terminal:
